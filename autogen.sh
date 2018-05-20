@@ -17,6 +17,7 @@ PKG_NAME=NetworkManager-l2tp
     autoreconf --install --symlink &&
     intltoolize --force &&
     autoreconf &&
+    exit 0 &&
     ./configure --enable-maintainer-mode $@
 )
 

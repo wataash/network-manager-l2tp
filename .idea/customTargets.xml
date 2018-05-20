@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="85850e11-d665-4e10-a440-16c76e78bfd2" name="cbt0" projectName="network-manager-l2tp">
+      <configuration id="ba5acde9-f07a-4327-a27a-2465f09560bd" name="cbt0" toolchainName="Default">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_et0" />
+        </build>
+      </configuration>
+    </target>
+  </component>
+</project>

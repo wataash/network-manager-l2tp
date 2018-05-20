@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="src/nm-l2tp-service" type="CLionExternalRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--debug" PASS_PARENT_ENVS_2="true" PROJECT_NAME="network-manager-l2tp" TARGET_NAME="cbt0" CONFIG_NAME="cbt0" RUN_PATH="$PROJECT_DIR$/src/nm-l2tp-service">
+    <envs>
+      <env name="NM_PPP_DEBUG" value="9" />
+      <env name="NM_VPN_LOG_LEVEL" value="9" />
+    </envs>
+    <method v="2">
+      <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+    </method>
+  </configuration>
+</component>
