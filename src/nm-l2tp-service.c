@@ -206,6 +206,7 @@ static ValidProperty valid_secrets[] = {
 
 static gboolean
 nm_l2tp_ipsec_error(GError **error, const char *msg) {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	g_set_error_literal (error,
 			NM_VPN_PLUGIN_ERROR,
 			NM_VPN_PLUGIN_ERROR_LAUNCH_FAILED,
@@ -215,6 +216,7 @@ nm_l2tp_ipsec_error(GError **error, const char *msg) {
 
 static gboolean
 has_include_ipsec_secrets (const char *ipsec_secrets_file) {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	g_autofree char *contents = NULL;
 	g_auto(GStrv) all_lines = NULL;
 
@@ -234,6 +236,7 @@ has_include_ipsec_secrets (const char *ipsec_secrets_file) {
 static gboolean
 validate_gateway (const char *gateway)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	const char *p = gateway;
 
 	if (!gateway || !gateway[0])
@@ -258,6 +261,7 @@ typedef struct ValidateInfo {
 static void
 validate_one_property (const char *key, const char *value, gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	ValidateInfo *info = (ValidateInfo *) user_data;
 	int i;
 
@@ -336,6 +340,7 @@ static gboolean
 nm_l2tp_properties_validate (NMSettingVpn *s_vpn,
                              GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	ValidateInfo info = { &valid_properties[0], error, FALSE };
 	int i;
 
@@ -378,6 +383,7 @@ nm_l2tp_properties_validate (NMSettingVpn *s_vpn,
 static gboolean
 nm_l2tp_secrets_validate (NMSettingVpn *s_vpn, GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	GError *validate_error = NULL;
 	ValidateInfo info = { &valid_secrets[0], error, FALSE };
 
@@ -395,6 +401,7 @@ nm_l2tp_stop_ipsec (NML2tpPluginPrivate *priv);
 static void
 l2tpd_watch_cb (GPid pid, gint status, gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *plugin = NM_L2TP_PLUGIN (user_data);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	guint error = 0;
@@ -443,6 +450,7 @@ l2tpd_watch_cb (GPid pid, gint status, gpointer user_data)
 static gboolean
 pppd_timed_out (gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *plugin = NM_L2TP_PLUGIN (user_data);
 
 	_LOGW ("Looks like pppd didn't initialize our dbus module");
@@ -454,6 +462,7 @@ pppd_timed_out (gpointer user_data)
 static void
 free_l2tpd_args (GPtrArray *args)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	int i;
 
 	if (!args)
@@ -467,6 +476,7 @@ free_l2tpd_args (GPtrArray *args)
 static gboolean
 str_to_int (const char *str, long int *out)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	long int tmp_int;
 
 	if (!str)
@@ -484,6 +494,7 @@ str_to_int (const char *str, long int *out)
 static inline void
 write_config_option (int fd, const char *format, ...)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	char * 	string;
 	va_list	args;
 	int		x;
@@ -529,6 +540,7 @@ static PPPOpt ppp_options[] = {
 static gboolean
 is_port_free(int port)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	struct sockaddr_in addr;
 	int sock;
 	g_message ("Check port %d", port);
@@ -557,6 +569,7 @@ nm_l2tp_config_write (NML2tpPlugin *plugin,
                       NMSettingVpn *s_vpn,
                       GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	GError *config_error = NULL;
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	NMSettingIPConfig *s_ip4;
@@ -1269,6 +1282,7 @@ nm_l2tp_config_write (NML2tpPlugin *plugin,
 static void
 nm_l2tp_stop_ipsec (NML2tpPluginPrivate *priv)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	char cmdbuf[256];
 	GPtrArray *whack_argv;
 	int sys = 0;
@@ -1302,6 +1316,7 @@ nm_l2tp_start_ipsec(NML2tpPlugin *plugin,
                             NMSettingVpn *s_vpn,
                             GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	char cmdbuf[256];
 	char *output = NULL;
@@ -1456,6 +1471,7 @@ nm_l2tp_start_l2tpd_binary (NML2tpPlugin *plugin,
                            NMSettingVpn *s_vpn,
                            GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	GPid pid;
 	const char *l2tpd_binary;
@@ -1497,6 +1513,7 @@ nm_l2tp_start_l2tpd_binary (NML2tpPlugin *plugin,
 static void
 remove_timeout_handler (NML2tpPlugin *plugin)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 
 	if (priv->ppp_timeout_handler) {
@@ -1510,6 +1527,7 @@ handle_need_secrets (NMDBusL2tpPpp *object,
                      GDBusMethodInvocation *invocation,
                      gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *self = NM_L2TP_PLUGIN (user_data);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (self);
 	NMSettingVpn *s_vpn;
@@ -1584,6 +1602,7 @@ handle_set_state (NMDBusL2tpPpp *object,
                   guint arg_state,
                   gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	remove_timeout_handler (NM_L2TP_PLUGIN (user_data));
 	if (arg_state == NM_PPP_STATUS_DEAD || arg_state == NM_PPP_STATUS_DISCONNECT)
 		nm_vpn_service_plugin_disconnect (NM_VPN_SERVICE_PLUGIN (user_data), NULL);
@@ -1598,6 +1617,7 @@ handle_set_ip4_config (NMDBusL2tpPpp *object,
                        GVariant *arg_config,
                        gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *plugin = NM_L2TP_PLUGIN (user_data);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	GVariantIter iter;
@@ -1635,6 +1655,7 @@ lookup_gateway (NML2tpPlugin *self,
                 const char *src,
                 GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (self);
 	const char *p = src;
 	gboolean is_name = FALSE;
@@ -1709,6 +1730,7 @@ real_connect (NMVpnServicePlugin *plugin,
               NMConnection *connection,
               GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 	NMSettingVpn *s_vpn;
 	const char *gwaddr;
@@ -1791,6 +1813,7 @@ real_need_secrets (NMVpnServicePlugin *plugin,
                    const char **setting_name,
                    GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NMSettingVpn *s_vpn;
 	NMSettingSecretFlags flags = NM_SETTING_SECRET_FLAG_NONE;
 	const char *value;
@@ -1852,6 +1875,7 @@ real_need_secrets (NMVpnServicePlugin *plugin,
 static gboolean
 ensure_killed (gpointer data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	int pid = GPOINTER_TO_INT (data);
 
 	if (kill (pid, 0) == 0)
@@ -1863,6 +1887,7 @@ ensure_killed (gpointer data)
 static gboolean
 real_disconnect (NMVpnServicePlugin *plugin, GError **err)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	char *filename;
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (plugin);
 
@@ -1927,6 +1952,7 @@ real_disconnect (NMVpnServicePlugin *plugin, GError **err)
 static void
 state_changed_cb (GObject *object, NMVpnServiceState state, gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (object);
 
 	switch (state) {
@@ -1953,6 +1979,7 @@ state_changed_cb (GObject *object, NMVpnServiceState state, gpointer user_data)
 static void
 dispose (GObject *object)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (object);
 	GDBusInterfaceSkeleton *skeleton = NULL;
 
@@ -1979,11 +2006,13 @@ dispose (GObject *object)
 static void
 nm_l2tp_plugin_init (NML2tpPlugin *plugin)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 }
 
 static void
 nm_l2tp_plugin_class_init (NML2tpPluginClass *l2tp_class)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	GObjectClass *object_class = G_OBJECT_CLASS (l2tp_class);
 	NMVpnServicePluginClass *parent_class = NM_VPN_SERVICE_PLUGIN_CLASS (l2tp_class);
 
@@ -2001,6 +2030,7 @@ static GInitableIface *ginitable_parent_iface = NULL;
 static gboolean
 init_sync (GInitable *object, GCancellable *cancellable, GError **error)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPluginPrivate *priv = NM_L2TP_PLUGIN_GET_PRIVATE (object);
 	GDBusConnection *bus;
 
@@ -2035,6 +2065,7 @@ init_sync (GInitable *object, GCancellable *cancellable, GError **error)
 static void
 nm_l2tp_plugin_initable_iface_init (GInitableIface *iface)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	ginitable_parent_iface = g_type_interface_peek_parent (iface);
 	iface->init = init_sync;
 }
@@ -2042,6 +2073,7 @@ nm_l2tp_plugin_initable_iface_init (GInitableIface *iface)
 NML2tpPlugin *
 nm_l2tp_plugin_new (const char *bus_name)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *plugin;
 	GError *error = NULL;
 
@@ -2060,12 +2092,14 @@ nm_l2tp_plugin_new (const char *bus_name)
 static void
 quit_mainloop (NML2tpPlugin *plugin, gpointer user_data)
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	g_main_loop_quit ((GMainLoop *) user_data);
 }
 
 int
 main (int argc, char *argv[])
 {
+	_LOGW("\x1b[32m%s\x1b[0m", __func__);
 	NML2tpPlugin *plugin;
 	GMainLoop *main_loop;
 	gboolean persist = FALSE;

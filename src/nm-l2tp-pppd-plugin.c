@@ -78,6 +78,7 @@ struct {
 static void
 nm_phasechange (void *data, int arg)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	NMPPPStatus ppp_status = NM_PPP_STATUS_UNKNOWN;
 	char *ppp_phase;
 
@@ -158,6 +159,7 @@ nm_phasechange (void *data, int arg)
 static void
 nm_ip_up (void *data, int arg)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	guint32 pppd_made_up_address = htonl (0x0a404040 + ifunit);
 	ipcp_options opts = ipcp_gotoptions[0];
 	ipcp_options peer_opts = ipcp_hisoptions[0];
@@ -234,18 +236,21 @@ nm_ip_up (void *data, int arg)
 static int
 get_chap_check (void)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	return 1;
 }
 
 static int
 get_pap_check (void)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	return 1;
 }
 
 static int
 get_credentials (char *username, char *password)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	const char *my_username = NULL;
 	const char *my_password = NULL;
 	GVariant *ret;
@@ -293,6 +298,7 @@ get_credentials (char *username, char *password)
 static void
 nm_exit_notify (void *data, int arg)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	g_return_if_fail (G_IS_DBUS_PROXY (gl.proxy));
 
 	_LOGI ("exit: cleaning up");
@@ -302,6 +308,7 @@ nm_exit_notify (void *data, int arg)
 int
 plugin_init (void)
 {
+	_LOGW("\x1b[32m %s \x1b[0m", __func__);
 	GDBusConnection *bus;
 	GError *error = NULL;
 	const char *bus_name;
